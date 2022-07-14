@@ -15,7 +15,7 @@
 $strHypervisorPlatform = "VMware"
 $strVCenter = "zbvcntr01.zmr.zimmer.com"
 #$strVMName = "sbctxmon"
-$strVMName = $args[2]
+$strVMName = $args[1]
 $User = "nam\citrixpvs"
 $Password = "Z!mm3R#"
 
