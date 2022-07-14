@@ -9,12 +9,15 @@
 
     Script requires VMware PowerCLI to be installed on the machine it runs on.
 
-    Author: Ton de Vreede, 7/12/2016
+    
 #>
 
-$strHypervisorPlatform = $args[0]
-$strVCenter = $args[1]
+$strHypervisorPlatform = "VMware"
+$strVCenter = "zbvcntr01.zmr.zimmer.com"
+#$strVMName = "sbctxmon"
 $strVMName = $args[2]
+$User = "nam\citrixpvs"
+$Password = "Z!mm3R#"
 
 Function Feedback {
     Param (
@@ -96,6 +99,7 @@ function Load-VMWareModules {
     }
 }
 
+
 Function Connect-VCenterServer {
     Param (
         [Parameter(Mandatory = $true,
@@ -104,7 +108,8 @@ Function Connect-VCenterServer {
     )
     Try {
         # Connect to VCenter server
-        Connect-VMWareVIServer -Server $VCenterName -WarningAction SilentlyContinue -Force
+        Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$False
+        Connect-VIServer -Server $VCenterName -User $User -Password $Password -WarningAction SilentlyContinue -Force
     }
     Catch {
         Feedback -Message "There was a problem connecting to VCenter server $VCenterName. Please correct the error and try again." -Exception $_
@@ -120,7 +125,7 @@ Function Disconnect-VCenterServer {
     # This function closes the connection with the VCenter server 'VCenter'
     try {
         # Disconnect from the VCenter server
-        Disconnect-VMWareVIServer -Server $VCenter -Confirm:$false
+        Disconnect-VIServer -Server $VCenter -Confirm:$false
     }
     catch {
         Feedback -Message "There was a problem disconnecting from VCenter server $VCenter." -Exception $_
@@ -142,7 +147,7 @@ Function Test-HypervisorPlatform {
 Function Check-VMSnapshots ($strVMName) {
     # Retrieve the snapshots of the machine
     try {
-        [array]$objSnapshot = Get-VMWareSnapshot -VM $strVMName -Server $VCenter
+        [array]$objSnapshot = Get-Snapshot -VM $strVMName -Server $VCenter
     }
     Catch {
         Feedback -Message "There was a problem retrieving the snapshots for machine $strVMName." -Exception $_
@@ -154,17 +159,17 @@ Function Check-VMSnapshots ($strVMName) {
         Exit 0
     }
     ElseIf ($objSnapshot.count -eq 1) {
-        Remove-VMSnapshot -objSnapshot $objSnapshot
+        Remove-Snapshot -objSnapshot $objSnapshot
     }
     Else {
-        Remove-VMSnapshotChain -objSnapshot $objSnapshot
+        Remove-SnapshotChain -objSnapshot $objSnapshot
     }
 }
 
 Function Remove-VMSnapshot ($objSnapshot) {
     try {
         # Remove the snapshot
-        $objSnapshot | Remove-VMWareSnapshot -RemoveChildren:$false -Confirm:$false >$null 
+        $objSnapshot | Remove-Snapshot -RemoveChildren:$false -Confirm:$false >$null 
     
         # Report the result
         Feedback -Message "Snapshot $objSnapshot (size $([math]::round($objSnapshot.SizeMB,2)) MB) was deleted."
@@ -174,14 +179,14 @@ Function Remove-VMSnapshot ($objSnapshot) {
     }
 }
 
-Function Remove-VMSnapshotChain ($objSnapshot) {
+Function Remove-SnapshotChain ($objSnapshot) {
     # This function removes a chain of snapshots of machine '$strVMName'
     try {
         # Record total snapshot size
         [int]$intSnapshotSize = $([math]::round($(($objSnapshot.SizeMB | Measure-Object -Sum).Sum),2))
 
         # Remove the snapshots
-        $objSnapshot | Sort-Object -Property Created | Select-Object -First 1 | Remove-VMWareSnapshot -RemoveChildren:$true -Confirm:$false >$null
+        $objSnapshot | Sort-Object -Property Created | Select-Object -First 1 | Remove-Snapshot -RemoveChildren:$true -Confirm:$false >$null
 
         # Report the result
         Feedback -Message "$($objSnapshot.Count) snapshots (total size $intSnapshotSize MB) were deleted from machine $strVMName"
@@ -192,9 +197,9 @@ Function Remove-VMSnapshotChain ($objSnapshot) {
 }
 
 # Check all the arguments have been passsed
-If ($args.count -lt 3) {
-    Feedback  -Message "The script did not get enough arguments from the Console. This can occur if you are not connected to the VM's hypervisor.`nPlease connect to the hypervisor in the ControlUp Console and try again." -Oops
-}
+#If ($args.count -lt 1) {
+ #   Feedback  -Message "The script did not get enough arguments from the Console. This can occur if you are not connected to the VM's hypervisor.`nPlease connect to the hypervisor in the ControlUp Console and try again." -Oops
+#}
 
 # Check the Hypervisor is supported
 Test-HypervisorPlatform -strHypervisorPlatform $strHypervisorPlatform
@@ -203,10 +208,11 @@ Test-HypervisorPlatform -strHypervisorPlatform $strHypervisorPlatform
 Load-VMWareModules -Components @('VimAutomation.Core') -Prefix 'VMWare'
 
 # Connect to VCenter server for VMWare
-$VCenter = Connect-VCenterServer -VCenterName $strVCenter
+Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$False
+$VCenter = Connect-VIServer -Server $strVCenter -User $User -Password $Password -WarningAction SilentlyContinue -Force
 
 # Remove the snapshots
-Check-VMSnapshots -strVMName $strVMName
+Get-Snapshot -VM $strVMName
 
 # Disconnect from the VCenter server
-Disconnect-VCenterServer -VCenter $VCenter
+Disconnect-VIServer -Server $VCenter -WarningAction SilentlyContinue -Force 
