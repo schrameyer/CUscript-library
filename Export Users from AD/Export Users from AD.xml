@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfSBADescriptor xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SBADescriptor>
+    <SBAId>4972a40a-aaa0-4f64-a36a-fe9b9a4a136b</SBAId>
+    <RootSBAId>9b0b5a2d-1705-4288-bad2-8d39eb812345</RootSBAId>
+    <StoreId>d159c1e2-9a6c-4324-bbe8-a69e941c6b98</StoreId>
+    <SQN>638027338633655501</SQN>
+    <Name>Export Users from AD</Name>
+    <Description>Exports users from active directory to a CSV for solve user import.
+Users and groups must be comma separated, if one is not used please have '$null' in the field so it does not attempt to be processed.
+A user account should contain the following data, otherwise it will not be exported:	userprincipalname (UPN), givenname, sn (surname), mail (emaill address), samaccountname, distinguishedname
+Builtin groups such as Domain Users are not supported
+		</Description>
+    <Category>Miscellaneous</Category>
+    <Version>1.0.19</Version>
+    <DateCreated>2022-10-11T06:31:44.647</DateCreated>
+    <DateModified>2022-10-30T13:33:02.997</DateModified>
+    <DatePublished>2022-10-30T13:35:05.42</DatePublished>
+    <LastEditorName>Ton de Vreede</LastEditorName>
+    <CreatorName>Steve Schneider</CreatorName>
+    <Status>4</Status>
+    <CheckSum>66OCLK4Gmq+uRylNPFvDqPVSw7M=</CheckSum>
+    <EULAVersion>1.0.0.0</EULAVersion>
+    <DenyCommunityShare>false</DenyCommunityShare>
+    <Icon>
+      <IconData>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</IconData>
+      <IconType>2</IconType>
+    </Icon>
+    <ShareDescriptor>
+      <Author>Steve Schneider</Author>
+      <Tags>Windows, Active Directory, AD, export, Solve</Tags>
+      <Credits>Credits to: 
+Original code by:
+Taken from:</Credits>
+      <AllowExposeEmail>false</AllowExposeEmail>
+      <ContactEmail />
+      <Notes />
+<<<<<<< HEAD
+      <DownloadCount>53</DownloadCount>
+=======
+      <DownloadCount>18</DownloadCount>
+>>>>>>> f8b742bdd46bf2e1788df0f17d77a08a8e7bcbe2
+    </ShareDescriptor>
+    <ExecutionDescriptor>
+      <AllowedEntitiesEx>256</AllowedEntitiesEx>
+      <AtomicEntityEx>256</AtomicEntityEx>
+      <AllowedEntities>0</AllowedEntities>
+      <AtomicEntity>0</AtomicEntity>
+      <ScriptData>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</ScriptData>
+      <IsCompressed>true</IsCompressed>
+      <Interactive>false</Interactive>
+      <AltCredentialsType>3</AltCredentialsType>
+      <Timeout>120</Timeout>
+      <ScriptType>3</ScriptType>
+      <TimeoutPolicy>1</TimeoutPolicy>
+      <ConcurrencyMode>2</ConcurrencyMode>
+      <ExecutionContext>0</ExecutionContext>
+      <Arguments>
+        <inner>
+          <sxSerializedDictionaryOfStringSBAArgumentDescriptor>
+            <item>
+              <key>
+                <string>c98569da-0aa2-4a6b-9e7f-b4bdd7a4bf1e</string>
+              </key>
+              <value>
+                <SBAArgumentDescriptor>
+                  <ArgumentId>c98569da-0aa2-4a6b-9e7f-b4bdd7a4bf1e</ArgumentId>
+                  <ArgumentType>1</ArgumentType>
+                  <Name>Usernames (Comma Separated)</Name>
+                  <DefaultValue>$null</DefaultValue>
+                  <ArgumentNumber>0</ArgumentNumber>
+                  <EmptyBehavior>0</EmptyBehavior>
+                  <ValidationString>.</ValidationString>
+                  <ValidationError>Users and groups must be comma separated, if one is not used please have 'null' in the field so it does not attempt to be processed.</ValidationError>
+                  <MaskTypedCharacters>false</MaskTypedCharacters>
+                  <EntityType>0</EntityType>
+                </SBAArgumentDescriptor>
+              </value>
+            </item>
+            <item>
+              <key>
+                <string>77aba048-02b4-403a-a9b3-5900b4645ce3</string>
+              </key>
+              <value>
+                <SBAArgumentDescriptor>
+                  <ArgumentId>77aba048-02b4-403a-a9b3-5900b4645ce3</ArgumentId>
+                  <ArgumentType>1</ArgumentType>
+                  <Name>Export Path</Name>
+                  <DefaultValue>c:\temp\ADUserExport.csv</DefaultValue>
+                  <ArgumentNumber>3</ArgumentNumber>
+                  <EmptyBehavior>0</EmptyBehavior>
+                  <ValidationString>.</ValidationString>
+                  <ValidationError>Please enter the full path + filename the export should be written to (ie. C:\Temp\ADUserExport.csv)</ValidationError>
+                  <MaskTypedCharacters>false</MaskTypedCharacters>
+                  <EntityType>0</EntityType>
+                </SBAArgumentDescriptor>
+              </value>
+            </item>
+            <item>
+              <key>
+                <string>77dd7cfa-8bcd-451e-84f0-f21946f97dc3</string>
+              </key>
+              <value>
+                <SBAArgumentDescriptor>
+                  <ArgumentId>77dd7cfa-8bcd-451e-84f0-f21946f97dc3</ArgumentId>
+                  <ArgumentType>1</ArgumentType>
+                  <Name>Group Names (Comma Separated)</Name>
+                  <DefaultValue>$null</DefaultValue>
+                  <ArgumentNumber>1</ArgumentNumber>
+                  <EmptyBehavior>0</EmptyBehavior>
+                  <ValidationString>.</ValidationString>
+                  <ValidationError>Users and groups must be comma separated, if one is not used please have 'null' in the field so it does not attempt to be processed.</ValidationError>
+                  <MaskTypedCharacters>false</MaskTypedCharacters>
+                  <EntityType>0</EntityType>
+                </SBAArgumentDescriptor>
+              </value>
+            </item>
+            <item>
+              <key>
+                <string>be7a59c0-0181-4646-b9fe-c5c578153594</string>
+              </key>
+              <value>
+                <SBAArgumentDescriptor>
+                  <ArgumentId>be7a59c0-0181-4646-b9fe-c5c578153594</ArgumentId>
+                  <ArgumentType>1</ArgumentType>
+                  <Name>Display warnings?</Name>
+                  <DefaultValue>false</DefaultValue>
+                  <ArgumentNumber>2</ArgumentNumber>
+                  <EmptyBehavior>0</EmptyBehavior>
+                  <ValidationString>true|True|false|False</ValidationString>
+                  <ValidationError>Please enter 'true' to display warnings, 'false' to hide them in the output (this is useful if you only want to display the found user results without any clutter in the screen output).</ValidationError>
+                  <MaskTypedCharacters>false</MaskTypedCharacters>
+                  <EntityType>0</EntityType>
+                </SBAArgumentDescriptor>
+              </value>
+            </item>
+          </sxSerializedDictionaryOfStringSBAArgumentDescriptor>
+        </inner>
+      </Arguments>
+      <InstructionsExecutionOnComputer />
+      <SupressOutputDialog>false</SupressOutputDialog>
+      <UseSdk>false</UseSdk>
+    </ExecutionDescriptor>
+    <MissingCred>false</MissingCred>
+<<<<<<< HEAD
+    <ImportValidationString>BxmmhG57O02n9QA6x01A/GmWZGw=</ImportValidationString>
+=======
+    <ImportValidationString>kujHqz1PLRO5f+aL2uJJmP4TIzI=</ImportValidationString>
+>>>>>>> f8b742bdd46bf2e1788df0f17d77a08a8e7bcbe2
+    <IsVersionAudited>false</IsVersionAudited>
+  </SBADescriptor>
+</ArrayOfSBADescriptor>
